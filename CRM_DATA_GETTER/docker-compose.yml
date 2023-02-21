@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: CRM_DATA
+    ports:
+      - 8000:5432
+    domainname: myDatabase
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 00000
+    ports:
+      - "8888:80"
+    links:
+      - db:myDatabase
+
+  laravel: 
+    image: gv1don/laravel
+    ports:
+      - 8001:8001
